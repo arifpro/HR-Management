@@ -8,6 +8,8 @@
     "start": "node .",
     "dev": "nodemon .",
     "lint:install": "yarn add -D prettier && yarn add -D babel-eslint && npx install-peerdeps --dev eslint-config-airbnb && yarn add -D eslint-config-prettier eslint-plugin-prettier",
+    "seed:down": "node src/seeder.js down",
+    "seed:up": "node src/seeder.js up",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

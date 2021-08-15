@@ -25,7 +25,12 @@ INSERT INTO `employees` (`firstName`, `lastName`, `email`) VALUES
 SELECT * FROM `employees`;
 ```
 
+## API
 
-## api
+- **GET:** `/api/v1/employee/get-all`
+- **POST:** `/api/v1/employee/add`
+- **POST:** `/api/v1/employee/add-multiple`
 
-- `GET /api/v1/employees`
+## API Documentation
+
+[https://documenter.getpostman.com/view/10908753/Tzz8qbxb](https://documenter.getpostman.com/view/10908753/Tzz8qbxb)
