@@ -1,13 +1,13 @@
 {
-  "name": "nodejs-javascript",
+  "name": "hr-management-backend",
   "version": "1.0.0",
-  "description": "nodejs(javascript) backend for online-shop",
+  "description": "nodejs(javascript) backend forhr-management",
   "type": "module",
   "main": "src/app.js",
   "scripts": {
     "start": "node .",
     "dev": "nodemon .",
-    "lint": "yarn add -D prettier && yarn add -D babel-eslint && npx install-peerdeps --dev eslint-config-airbnb && yarn add -D eslint-config-prettier eslint-plugin-prettier",
+    "lint:install": "yarn add -D prettier && yarn add -D babel-eslint && npx install-peerdeps --dev eslint-config-airbnb && yarn add -D eslint-config-prettier eslint-plugin-prettier",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -22,10 +22,12 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.7",
     "morgan": "^1.10.0",
-    "multer": "^1.4.3"
+    "multer": "^1.4.3",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
