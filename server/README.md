@@ -8,7 +8,7 @@ CREATE TABLE `employees` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `firstName` VARCHAR(50) NOT NULL,
     `lastName` VARCHAR(50) NOT NULL,
-    `email` VARCHAR(100) NOT NULL,
+    `email` VARCHAR(100) UNIQUE NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;
 ```

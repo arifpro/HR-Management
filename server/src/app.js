@@ -5,23 +5,21 @@ import express from "express";
 import morgan from "morgan";
 
 // database connection
-import {mongodbConnect, mysqlConnect, mysqlRemoteConnect} from "./configs/db.js";
+import database from "./configs/db.js";
 
 const app = express();
 config();
-
-// mongodbConnect();
-mysqlRemoteConnect();
-
-// if (process.env.NODE_MODE === "development") {
-//   mysqlConnect();
-// } else if (process.env.NODE_MODE === "production") {
-//   mysqlRemoteConnect();
-// }
-
+database.sequelize.sync();
+// <===== drop the table if it already exists =====>
+// database.sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and re-sync db.");
+// });
 
 // import routers
 import employeesRoutes from "./routes/employeesRoutes.js";
+
+// import middlewares
+import errorHandler from "./middlewares/errorHandler.js";
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -31,8 +29,8 @@ app.use(function (req, res, next) {
   );
   next();
 });
-if (process.env.DB_MODE === 'development') {
-  app.use(morgan('dev'))
+if (process.env.NODE_MODE === "development") {
+  app.use(morgan("dev"));
 }
 app.use(cookieParser());
 app.use(cors());
@@ -40,7 +38,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Routes
-app.use("/api/v1/employees", employeesRoutes);
+app.use("/api/v1/employee", employeesRoutes);
+app.use(errorHandler);
 
 // Run Server
 const PORT = process.env.PORT || 7001;
