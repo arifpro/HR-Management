@@ -3,18 +3,25 @@ import cors from "cors";
 import { config } from "dotenv";
 import express from "express";
 import morgan from "morgan";
-import path from "path";
+
 // database connection
-import database from "./configs/db.js";
+import {mongodbConnect, mysqlConnect, mysqlRemoteConnect} from "./configs/db.js";
 
 const app = express();
-const __dirname = path.resolve();
 config();
 
-database();
+// mongodbConnect();
+mysqlRemoteConnect();
+
+// if (process.env.NODE_MODE === "development") {
+//   mysqlConnect();
+// } else if (process.env.NODE_MODE === "production") {
+//   mysqlRemoteConnect();
+// }
+
 
 // import routers
-// import testRoutes from "./routes/testRoutes.js";
+import employeesRoutes from "./routes/employeesRoutes.js";
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -33,8 +40,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Routes
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
-// app.use("/api/test", testRoutes);
+app.use("/api/v1/employees", employeesRoutes);
 
 // Run Server
 const PORT = process.env.PORT || 7001;
