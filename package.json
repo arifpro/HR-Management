@@ -1,7 +1,7 @@
 {
   "name": "hr-management-backend",
   "version": "1.0.0",
-  "description": "nodejs(javascript) backend forhr-management",
+  "description": "nodejs(javascript) backend for hr-management",
   "type": "module",
   "main": "src/app.js",
   "scripts": {
@@ -12,22 +12,20 @@
   },
   "keywords": [
     "express",
-    "mongodb"
+    "mysql"
   ],
   "author": "Md Arif Hossain | https://arifpro.github.io | http://devarif.me",
   "license": "ISC",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.13.7",
+    "joi": "^17.4.2",
     "morgan": "^1.10.0",
-    "multer": "^1.4.3",
-    "mysql": "^2.18.1"
+    "mysql2": "^2.3.0",
+    "sequelize": "^6.6.5"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
