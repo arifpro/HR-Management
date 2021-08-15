@@ -11,6 +11,7 @@ const Employee = (sequelize, Sequelize) => {
     email: {
       type: Sequelize.STRING,
       allowNull: false,
+      unique: false,
     },
   });
 
