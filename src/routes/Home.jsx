@@ -1,15 +1,18 @@
-import Info from '../components/HomePage/Info';
+import Greeting from '../components/HomePage/Greeting';
 import Layout from '../components/Layout';
 
-const Home = () => {
-    const name = 'Home';
-
-    return (
-        <Layout title="Home">
-            <h1>{name} page</h1>
-            <Info />
-        </Layout>
-    );
-};
-
+const Home = () => (
+    <Layout title="Home">
+        <div
+            style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+            }}
+        >
+            <Greeting />
+        </div>
+    </Layout>
+);
 export default Home;

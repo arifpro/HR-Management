@@ -1,15 +1,19 @@
 import Info from '../components/AboutPage/Info';
 import Layout from '../components/Layout';
 
-const About = () => {
-    const name = 'About';
-
-    return (
-        <Layout title="About">
-            <h1>{name} page</h1>
+const About = () => (
+    <Layout title="About">
+        <div
+            style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '50vh',
+            }}
+        >
             <Info />
-        </Layout>
-    );
-};
+        </div>
+    </Layout>
+);
 
 export default About;
