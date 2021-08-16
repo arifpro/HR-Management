@@ -74,7 +74,7 @@ const addEmployee = asyncHandler(async (req, res) => {
         // Save employee in the database if email is not already in the database
         Employee.create({ firstName, lastName, email })
           .then((data) => {
-            return res.status(200).send({
+            return res.status(201).send({
               status: true,
               message: "Successfully added employee",
               data: data,
