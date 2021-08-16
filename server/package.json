@@ -10,7 +10,9 @@
     "lint:install": "yarn add -D prettier && yarn add -D babel-eslint && npx install-peerdeps --dev eslint-config-airbnb && yarn add -D eslint-config-prettier eslint-plugin-prettier",
     "seed:down": "node src/seeder.js down",
     "seed:up": "node src/seeder.js up",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test0": "jest --forceExit",
+    "test": "jest --detectLeaks --detectOpenHandles",
+    "pretest": "cross-env NODE_ENV=test npm run seed:down"
   },
   "keywords": [
     "express",
@@ -24,13 +26,15 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
-    "joi": "^17.4.2",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.0",
-    "sequelize": "^6.6.5"
+    "sequelize": "^6.6.5",
+    "weak-napi": "^2.0.2"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.15.0",
     "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.2.0",
     "eslint-config-airbnb": "18.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -39,7 +43,15 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "jest": "^27.0.6",
     "nodemon": "^2.0.12",
-    "prettier": "^2.3.2"
+    "prettier": "^2.3.2",
+    "supertest": "^6.1.5"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }
