@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import AnalogClock from 'analog-clock-react';
-import './Greeting.scss';
+import { Link } from 'react-router-dom';
+import styles from '../../styles/GreetingStyles.module.scss';
 
 const Greeting = () => {
     const myDate = new Date();
@@ -24,43 +25,23 @@ const Greeting = () => {
     };
 
     return (
-        <div className="wrapper">
-            <div className="img-area">
-                <div className="inner-area">
+        <div className={styles.wrapper}>
+            <div className={styles.outArea}>
+                <div className={styles.innerArea}>
                     <AnalogClock {...clockOptions} />
                 </div>
             </div>
 
-            <div className="name">{greet}</div>
-            <div className="about">Welcome to HR-Management!</div>
+            <div className={styles.name}>{greet}</div>
+            <div className={styles.about}>Welcome to HR-Management!</div>
 
-            <div className="linkBtn" style={{ marginTop: '1rem' }}>
-                <button
-                    type="button"
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius: '25px',
-                    }}
-                >
-                    Add Employee(s)
-                </button>
-            </div>
+            <Link to="/addEmp" className={styles.linkBtn}>
+                <button type="button">Add Employee(s)</button>
+            </Link>
 
-            <div className="linkBtn" style={{ marginTop: '1rem' }}>
-                <button
-                    type="button"
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius: '25px',
-                    }}
-                >
-                    Show Employees
-                </button>
-            </div>
+            <Link to="/showEmp" className={styles.linkBtn}>
+                <button type="button">Show Employees</button>
+            </Link>
         </div>
     );
 };
