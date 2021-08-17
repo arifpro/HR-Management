@@ -1,13 +1,10 @@
+import ShowTable from '../components/Employee/ShowTable';
 import Layout from '../components/Layout';
 
-const ShowEmp = () => {
-    const name = 'ShowEmployee';
-
-    return (
-        <Layout title="ShowEmployee">
-            <h1>{name} page</h1>
-        </Layout>
-    );
-};
+const ShowEmp = () => (
+    <Layout title="ShowEmployee">
+        <ShowTable />
+    </Layout>
+);
 
 export default ShowEmp;
