@@ -1,16 +1,51 @@
-.AddEmployee__form {
+.AddEmp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5rem;
+
+  .AddEmp__form {
+    width: 500px;
     background: white;
-    
-  .AddEmployee__input {
-    margin-top: 1rem;
-    margin-bottom: 0.1rem;
-  }
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
 
-  .AddEmployee__error {
-    color: tomato;
-  }
+    .AddEmp__input {
+      margin-top: 1rem;
+      margin-bottom: 0.1rem;
+    }
 
-  .AddEmployee__btn {
-    margin-top: 1rem;
+    .AddEmp__error {
+      color: tomato;
+    }
+
+    .AddEmp__btn {
+      margin-top: 1rem;
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+
+      input {
+        background: #ecf0f3;
+        box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 25px;
+
+        position: relative;
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 12px 0;
+        color: #31344b;
+        font-family: "Comic Sans MS";
+        font-size: 17px;
+        font-weight: 400;
+        cursor: pointer;
+        z-index: 4;
+      }
+    }
   }
 }

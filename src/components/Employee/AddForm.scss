@@ -1,0 +1,134 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Lato:wght@1,300&display=swap"); */
+@font-face {
+  font-family: Lato-Regular;
+  src: url("../../assets/fonts/Lato-Regular.ttf");
+}
+@font-face {
+  font-family: Lato-Bold;
+  src: url("../../assets/fonts/Lato-Bold.ttf");
+}
+
+@-webkit-keyframes autofill {
+  0%,
+  100% {
+    color: #666;
+    background: transparent;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none !important;
+  -webkit-text-fill-color: inherit !important;
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+  box-shadow: inset -10px -6px -2px rgba(0, 0, 0, 0.2), inset -8px -8px 8px #fff;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+@keyframes LoadingIconSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.AddForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mainSection {
+  overflow: hidden;
+  width: 500px;
+  padding: 30px 50px;
+  border-radius: 40px;
+  background-color: #ecf0f3;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.navbar__logo {
+  background: url("../../assets/images/employee.png") no-repeat;
+  background-size: 80px;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  margin: 0 auto;
+  box-shadow: 0px 0px 2px #5f5f5f, 0px 0px 0px 5px #ecf0f3, 8px 8px 15px #a7aaaf,
+    -8px -8px 15px #fff;
+}
+.navbar__title {
+  text-align: center;
+  font-size: 22px;
+  margin-top: 24px;
+  letter-spacing: 0.5px;
+}
+.navbar__sub-title {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 7px;
+  letter-spacing: 3px;
+}
+.navbar__fields {
+  width: 100%;
+  padding: 0px 4px;
+  margin-top: 25px;
+  input {
+    border: none;
+    outline: none;
+    background: transparent !important;
+    font-size: 16px;
+    color: #555;
+    padding: 12px 0 12px 5px;
+  }
+  svg {
+    height: auto;
+    margin: 0 10px -3px 40px;
+  }
+}
+.dropzone__field {
+  width: 100%;
+  padding: 0px 4px;
+  margin-top: 25px;
+}
+.navbar__username {
+  display: flex;
+  margin-bottom: 30px;
+  border-radius: 25px;
+  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+}
+.navbar__signin-button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  height: 50px;
+  width: 100%;
+  border-radius: 30px;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: Lato-Regular, sans-serif;
+  color: #fff;
+  background-color: #203263;
+  text-align: center;
+  box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #fff;
+  transition: all 0.5s;
+  &:hover {
+    background-color: #1b3b94;
+  }
+  &:active {
+    background-color: #2051d8;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .loading__icon {
+    font-size: 18px;
+    margin-right: 10px;
+    animation: LoadingIconSpin infinite 2s linear;
+  }
+}

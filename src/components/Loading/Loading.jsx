@@ -1,4 +1,4 @@
-import reactLogo from '../../assets/react-logo.png';
+import reactLogo from '../../assets/images/react-logo.png';
 import styles from '../../styles/LoadingStyles.module.scss';
 
 const Loading = () => (
