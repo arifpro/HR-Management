@@ -1,11 +1,14 @@
-import AddDragAndDrop from '../components/Employee/AddDragAndDrop';
+// import AddDragAndDrop from '../components/Employee/AddDragAndDrop';
 import AddForm from '../components/Employee/AddForm';
 import Layout from '../components/Layout';
 
 const AddEmp = () => (
     <Layout title="AddEmployee">
         <AddForm />
-        <AddDragAndDrop />
+        {/* <div style={{ textAlign: 'center', margin: '4rem 0' }}>
+            <h1>Or</h1>
+        </div>
+        <AddDragAndDrop /> */}
     </Layout>
 );
 
