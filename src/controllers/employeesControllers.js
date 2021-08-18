@@ -6,7 +6,7 @@ const Employee = database.employees;
  * @desc       get all employees
  * @param      {object}   req  - request
  * @param      {object}   res  - response
- * @route      GET /api/v1/employee/get-al
+ * @route      GET /api/v1/employee/get-all
  * @access     Public
  * @author     Md Arif Hossain
  * @version    1.0.0

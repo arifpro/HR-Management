@@ -41,9 +41,11 @@ ExpressJs + MySql + Sequelize
     ```sql
     CREATE TABLE `employees` (
         `id` INT(11) NOT NULL AUTO_INCREMENT,
-        `firstName` VARCHAR(50) NOT NULL,
-        `lastName` VARCHAR(50) NOT NULL,
-        `email` VARCHAR(100) UNIQUE NOT NULL,
+        `firstName` varchar(50) NOT NULL,
+        `lastName` varchar(50) NOT NULL,
+        `email` varchar(100) NOT NULL,
+        `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
+        `updatedAt` datetime DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (`id`)
     ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;
     ```
