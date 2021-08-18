@@ -67,6 +67,7 @@ ExpressJs + MySql + Sequelize
 - Get all employee data — **GET** — `/api/v1/employee/get-all`
 - Add one employee — **POST** — `/api/v1/employee/add`
 - Add multiple employees — **POST** — `/api/v1/employee/add-multiple`
+- Send mail — **POST** — `/api/v1/mail/send`
 
 ## API Documentation
 

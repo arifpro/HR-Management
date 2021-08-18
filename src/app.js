@@ -17,6 +17,7 @@ database.sequelize.sync();
 
 // import routers
 import employeesRoutes from "./routes/employeesRoutes.js";
+import mailRoutes from "./routes/mailRoutes.js";
 
 // import middlewares
 import errorHandler from "./middlewares/errorHandler.js";
@@ -39,6 +40,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/v1/employee", employeesRoutes);
+app.use("/api/v1/mail", mailRoutes);
 app.use(errorHandler);
 
 // Run Server
