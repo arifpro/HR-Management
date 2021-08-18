@@ -18,6 +18,24 @@ config();
 const sendMail = asyncHandler(async (req, res) => {
   const { to, subject, message } = req.body;
 
+  // Validate request
+  if (!to) {
+    return res.status(400).send({
+      status: false,
+      message: "Email address is required and it should be an array",
+    });
+  } else if (!subject) {
+    return res.status(400).send({
+      status: false,
+      message: "Email subject is required",
+    });
+  } else if (!message) {
+    return res.status(400).send({
+      status: false,
+      message: "Email content message is required",
+    });
+  }
+
   //   configs
   const transport = nodemailer.createTransport({
     host: process.env.MAIL_HOST || "smtp.mailtrap.io",
