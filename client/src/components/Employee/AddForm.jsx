@@ -21,11 +21,7 @@ const themes = createTheme({
                 alignItems: 'center',
             },
             flexContainer: {
-                color: 'blue',
-                // backgroundColor: 'blue',
-                selected: {
-                    color: 'red',
-                },
+                color: '#203263',
             },
         },
         PrivateTabIndicator: {

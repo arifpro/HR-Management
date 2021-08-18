@@ -17,14 +17,15 @@ import {
     IconButton,
     Tooltip,
 } from '@material-ui/core';
-import MailIcon from '@material-ui/icons/Mail';
-import FilterListIcon from '@material-ui/icons/FilterList';
+import { Mail, FilterList } from '@material-ui/icons';
+import SendMail from './SendMail';
+import CustomModal from '../../common/CustomModal';
 
 function createData(no, firstName, lastName, email) {
     return { no, firstName, lastName, email };
 }
 
-const rows = [
+export const rows = [
     createData(1, 'Md Arif 1', 'Hossain', 'arif.swfu@outlook.com'),
     createData(2, 'Md Arif 2', 'Hossain', 'arif.swfu@outlook.com'),
     createData(3, 'Md Arif 3', 'Hossain', 'arif.swfu@outlook.com'),
@@ -127,26 +128,33 @@ const useToolbarStyles = makeStyles((theme) => ({
     title: {
         flex: '1 1 100%',
     },
+    paper: {
+        position: 'absolute',
+        width: 400,
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
 }));
 
-const EnhancedTableToolbar = (props) => {
+const EnhancedTableToolbar = ({ selected, setViewModal }) => {
     const classes = useToolbarStyles();
-    const { numSelected } = props;
 
     return (
         <Toolbar
             className={clsx(classes.root, {
-                [classes.highlight]: numSelected > 0,
+                [classes.highlight]: selected.length > 0,
             })}
         >
-            {numSelected > 0 ? (
+            {selected.length > 0 ? (
                 <Typography
                     className={classes.title}
                     color="inherit"
                     variant="subtitle1"
                     component="div"
                 >
-                    {numSelected} selected
+                    {selected.length} selected
                 </Typography>
             ) : (
                 <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
@@ -154,16 +162,16 @@ const EnhancedTableToolbar = (props) => {
                 </Typography>
             )}
 
-            {numSelected > 0 ? (
-                <Tooltip title="Delete">
-                    <IconButton aria-label="delete">
-                        <MailIcon onClick={() => console.log(numSelected)} />
+            {selected.length > 0 ? (
+                <Tooltip title="Mail">
+                    <IconButton aria-label="mail">
+                        <Mail onClick={() => setViewModal(true)} />
                     </IconButton>
                 </Tooltip>
             ) : (
                 <Tooltip title="Filter list">
                     <IconButton aria-label="filter list">
-                        <FilterListIcon />
+                        <FilterList />
                     </IconButton>
                 </Tooltip>
             )}
@@ -197,6 +205,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ShowTable() {
     const classes = useStyles();
+    const [viewModal, setViewModal] = useState(false);
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('calories');
     const [selected, setSelected] = useState([]);
@@ -252,80 +261,85 @@ function ShowTable() {
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     return (
-        <div className={classes.root}>
-            <Paper className={classes.paper}>
-                <EnhancedTableToolbar numSelected={selected.length} />
-                <TableContainer>
-                    <Table
-                        className={classes.table}
-                        aria-labelledby="Employees"
-                        size="medium"
-                        aria-label="enhanced table"
-                    >
-                        <EnhancedTableHead
-                            classes={classes}
-                            numSelected={selected.length}
-                            order={order}
-                            orderBy={orderBy}
-                            onSelectAllClick={handleSelectAllClick}
-                            onRequestSort={handleRequestSort}
-                            rowCount={rows.length}
-                        />
-                        <TableBody>
-                            {stableSort(rows, getComparator(order, orderBy))
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row, index) => {
-                                    const isItemSelected = isSelected(row.no);
-                                    const labelId = `enhanced-table-checkbox-${index}`;
+        <div>
+            <div className={classes.root}>
+                <Paper className={classes.paper}>
+                    <EnhancedTableToolbar selected={selected} setViewModal={setViewModal} />
+                    <TableContainer>
+                        <Table
+                            className={classes.table}
+                            aria-labelledby="Employees"
+                            size="medium"
+                            aria-label="enhanced table"
+                        >
+                            <EnhancedTableHead
+                                classes={classes}
+                                numSelected={selected.length}
+                                order={order}
+                                orderBy={orderBy}
+                                onSelectAllClick={handleSelectAllClick}
+                                onRequestSort={handleRequestSort}
+                                rowCount={rows.length}
+                            />
+                            <TableBody>
+                                {stableSort(rows, getComparator(order, orderBy))
+                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map((row, index) => {
+                                        const isItemSelected = isSelected(row.no);
+                                        const labelId = `enhanced-table-checkbox-${index}`;
 
-                                    return (
-                                        <TableRow
-                                            hover
-                                            onClick={(event) => handleClick(event, row.no)}
-                                            role="checkbox"
-                                            aria-checked={isItemSelected}
-                                            tabIndex={-1}
-                                            key={row.no}
-                                            selected={isItemSelected}
-                                        >
-                                            <TableCell padding="checkbox">
-                                                <Checkbox
-                                                    checked={isItemSelected}
-                                                    inputProps={{ 'aria-labelledby': labelId }}
-                                                />
-                                            </TableCell>
-                                            <TableCell
-                                                component="th"
-                                                id={labelId}
-                                                scope="row"
-                                                padding="none"
+                                        return (
+                                            <TableRow
+                                                hover
+                                                onClick={(event) => handleClick(event, row.no)}
+                                                role="checkbox"
+                                                aria-checked={isItemSelected}
+                                                tabIndex={-1}
+                                                key={row.no}
+                                                selected={isItemSelected}
                                             >
-                                                {row.no}
-                                            </TableCell>
-                                            <TableCell align="left">{row.firstName}</TableCell>
-                                            <TableCell align="left">{row.lastName}</TableCell>
-                                            <TableCell align="left">{row.email}</TableCell>
-                                        </TableRow>
-                                    );
-                                })}
-                            {emptyRows > 0 && (
-                                <TableRow style={{ height: 53 * emptyRows }}>
-                                    <TableCell colSpan={6} />
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    component="div"
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-            </Paper>
+                                                <TableCell padding="checkbox">
+                                                    <Checkbox
+                                                        checked={isItemSelected}
+                                                        inputProps={{ 'aria-labelledby': labelId }}
+                                                    />
+                                                </TableCell>
+                                                <TableCell
+                                                    component="th"
+                                                    id={labelId}
+                                                    scope="row"
+                                                    padding="none"
+                                                >
+                                                    {row.no}
+                                                </TableCell>
+                                                <TableCell align="left">{row.firstName}</TableCell>
+                                                <TableCell align="left">{row.lastName}</TableCell>
+                                                <TableCell align="left">{row.email}</TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
+                                {emptyRows > 0 && (
+                                    <TableRow style={{ height: 53 * emptyRows }}>
+                                        <TableCell colSpan={6} />
+                                    </TableRow>
+                                )}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 25]}
+                        component="div"
+                        count={rows.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                </Paper>
+            </div>
+            <CustomModal viewModal={viewModal} setViewModal={setViewModal}>
+                <SendMail selected={selected} />
+            </CustomModal>
         </div>
     );
 }

@@ -9,9 +9,10 @@ const Greeting = () => {
     const hrs = myDate.getHours();
 
     let greet = 'Good ';
-    if (hrs < 12) greet += 'Morning';
-    else if (hrs >= 12 && hrs <= 17) greet += 'Afternoon';
-    else if (hrs >= 17 && hrs <= 24) greet += 'Evening';
+    if (hrs >= 6 && hrs < 12) greet += 'Morning';
+    else if (hrs <= 17) greet += 'Afternoon';
+    else if (hrs <= 20) greet += 'Evening';
+    else if (hrs >= 20 || hrs <= 6) greet += 'Night';
 
     const clockOptions = {
         width: '100%',
