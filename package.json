@@ -1,0 +1,21 @@
+{
+  "name": "HR-Management",
+  "version": "1.0.0",
+  "description": "This responsibility is to develop API using `Express` with `MySQL` database and make a company HR management like web application using `React` as frontend JavaScript Framework",
+  "main": "index.js",
+  "scripts": {
+    "push:client": "git subtree push --prefix client origin client",
+    "push:server": "git subtree push --prefix server origin server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arifpro/HR-Management.git"
+  },
+  "keywords": [],
+  "author": "Md Arif Hossain | https://arifpro.github.io | http://devarif.me",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arifpro/HR-Management/issues"
+  },
+  "homepage": "https://github.com/arifpro/HR-Management#readme"
+}
