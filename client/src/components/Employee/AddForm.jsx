@@ -15,19 +15,26 @@ import './AddForm.scss';
 
 const themes = createTheme({
     overrides: {
+        MuiTab: {
+            wrapper: {
+                fontFamily: 'Comic Sans MS',
+                fontWeight: 'bold',
+                fontSize: '1rem',
+            },
+        },
         MuiTabs: {
+            root: {
+                borderRight: 'none !important',
+                marginLeft: '1rem',
+            },
             scrollable: {
                 display: 'flex',
                 alignItems: 'center',
             },
-            flexContainer: {
-                color: '#203263',
-            },
         },
         PrivateTabIndicator: {
             colorSecondary: {
-                color: 'blue',
-                backgroundColor: 'gray',
+                backgroundColor: 'none',
             },
         },
     },
@@ -110,11 +117,11 @@ const AddForm = () => {
                 </MuiThemeProvider>
                 <TabPanel value={value} index={0}>
                     <form autoComplete="off" className="mainSection">
-                        <div className="navbar__logo" />
-                        <div className="navbar__title">Add Single Employee</div>
-                        <div className="navbar__sub-title">Please fill all required fields!</div>
-                        <div className="navbar__fields">
-                            <div className="navbar__username">
+                        <div className="form__logo" />
+                        <div className="form__title">Add Single Employee</div>
+                        <div className="form__sub-title">Please fill all required fields!</div>
+                        <div className="form__fields">
+                            <div className="form__username">
                                 <IoPerson />
                                 <input
                                     // type="text"
@@ -126,7 +133,7 @@ const AddForm = () => {
                                 />
                             </div>
 
-                            <div className="navbar__username">
+                            <div className="form__username">
                                 <IoPerson />
                                 <input
                                     type="text"
@@ -138,7 +145,7 @@ const AddForm = () => {
                                 />
                             </div>
 
-                            <div className="navbar__username">
+                            <div className="form__username">
                                 <IoMail />
                                 <input
                                     type="email"
@@ -168,7 +175,7 @@ const AddForm = () => {
 
                         <button
                             type="button"
-                            className="navbar__signin-button"
+                            className="main__button"
                             onClick={() => null}
                             disabled={data.loading}
                         >
@@ -184,9 +191,9 @@ const AddForm = () => {
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <form autoComplete="off" className="mainSection">
-                        <div className="navbar__logo" />
-                        <div className="navbar__title">Add Multiple Employees</div>
-                        <div className="navbar__sub-title">Please add a csv file!</div>
+                        <div className="form__logo" />
+                        <div className="form__title">Add Multiple Employees</div>
+                        <div className="form__sub-title">Please add a csv file!</div>
                         <div className="dropzone__field">
                             <AddDragAndDrop />
                         </div>

@@ -127,6 +127,8 @@ const useToolbarStyles = makeStyles((theme) => ({
               },
     title: {
         flex: '1 1 100%',
+        color: '#203263',
+        fontWeight: 'bold',
     },
     paper: {
         position: 'absolute',
@@ -180,15 +182,20 @@ const EnhancedTableToolbar = ({ selected, setViewModal }) => {
 };
 
 const useStyles = makeStyles((theme) => ({
+    mainDiv: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     root: {
         width: '100%',
+        maxWidth: '750px',
     },
     paper: {
         width: '100%',
         marginBottom: theme.spacing(2),
-    },
-    table: {
-        minWidth: 750,
+        boxShadow: theme.shadows[5],
+        borderRadius: '10px',
     },
     visuallyHidden: {
         border: 0,
@@ -261,13 +268,12 @@ function ShowTable() {
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     return (
-        <div>
+        <div className={classes.mainDiv}>
             <div className={classes.root}>
                 <Paper className={classes.paper}>
                     <EnhancedTableToolbar selected={selected} setViewModal={setViewModal} />
                     <TableContainer>
                         <Table
-                            className={classes.table}
                             aria-labelledby="Employees"
                             size="medium"
                             aria-label="enhanced table"

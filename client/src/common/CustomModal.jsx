@@ -4,11 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
-        width: 350,
+        // width: 350,
         backgroundColor: theme.palette.background.paper,
-        borderRadius: '20px',
+        borderRadius: '40px',
         boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
     },
 }));
 
@@ -19,6 +18,7 @@ const CustomModal = ({ children, viewModal, setViewModal }) => {
         <div>
             <Modal
                 open={viewModal}
+                // open={true}
                 onClose={() => setViewModal(false)}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"

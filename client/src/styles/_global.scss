@@ -8,9 +8,9 @@ body {
   margin: 0;
   line-height: 1;
   background: #ecf0f3;
-  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -142,6 +142,13 @@ q:after {
   content: none;
 }
 
+*:focus {
+  outline: none;
+  border-color: inherit;
+  -webkit-box-shadow: inherit;
+  box-shadow: inherit;
+}
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -149,4 +156,73 @@ table {
 
 a {
   text-decoration: none;
+}
+
+.MuiTab-textColorInherit.Mui-selected {
+  background-color: #203263;
+  color: #fff;
+  border-radius: 50px 20px 50px 20px;
+}
+
+.MuiTableCell-head {
+  background-color: #203263;
+  width: '95%';
+  span {
+    color: #fff !important;
+    font-family: "Comic Sans MS";
+    font-weight: bold;
+    font-size: 1rem;
+    svg {
+      color: #fff;
+    }
+    &:first-child {
+      font-family: inherit;
+    }
+    &:hover {
+      color: #fff;
+    }
+    &:active {
+      color: #fff;
+    }
+  }
+  &:first-child {
+    border-top-left-radius: 20px;
+  }
+  &:last-child {
+    border-top-right-radius: 20px;
+  }
+  &:hover {
+    color: #fff;
+  }
+  &:active {
+    color: #fff;
+  }
+}
+
+.MuiTablePagination-root:last-child {
+  background-color: #203263;
+  color: #fff;
+  font-family: "Comic Sans MS";
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 0 0 10px 10px;
+  svg {
+    color: #fff;
+  }
+}
+
+.MuiButtonBase-root.MuiTableSortLabel-root.MuiTableSortLabel-active {
+  color: #fff;
+  span {
+    color: #fff;
+  }
+  svg {
+    color: #fff;
+    &:hover {
+      color: #fff;
+    }
+    &:active {
+      color: #fff;
+    }
+  }
 }
