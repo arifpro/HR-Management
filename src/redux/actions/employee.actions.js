@@ -38,7 +38,6 @@ const addSingleEmployee = (data) => async (dispatch) => {
 
         const { firstName, lastName, email } = data;
         const newEmployee = { firstName, lastName, email };
-        console.log('addSingleEmployee data', newEmployee);
 
         const res = await api.post(`/api/v1/employee/add`, newEmployee);
 
@@ -67,11 +66,10 @@ const addMultipleEmployees = (data) => async (dispatch) => {
             type: employeeConstants.ADD_MULTIPLE_EMPLOYEES_REQUEST,
         });
 
-        const { to, subject, message } = data;
-        const newMail = { to, subject, message };
-        console.log('sendMail data', newMail);
+        const { employees } = data;
+        const newEmployees = { employees };
 
-        const res = await api.post(`/api/v1/employee/add-multiple`, newMail);
+        const res = await api.post(`/api/v1/employee/add-multiple`, newEmployees);
 
         if (res.status === 200) {
             return dispatch({
