@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
 import {
@@ -21,17 +22,17 @@ import { Mail, FilterList } from '@material-ui/icons';
 import SendMail from './SendMail';
 import CustomModal from '../../common/CustomModal';
 
-function createData(no, firstName, lastName, email) {
-    return { no, firstName, lastName, email };
-}
+// function createData(no, firstName, lastName, email) {
+//     return { no, firstName, lastName, email };
+// }
 
-export const rows = [
-    createData(1, 'Md Arif 1', 'Hossain', 'arif.swfu@outlook.com'),
-    createData(2, 'Md Arif 2', 'Hossain', 'arif.swfu@outlook.com'),
-    createData(3, 'Md Arif 3', 'Hossain', 'arif.swfu@outlook.com'),
-    createData(4, 'Md Arif 4', 'Hossain', 'arif.swfu@outlook.com'),
-    createData(5, 'Md Arif 5', 'Hossain', 'arif.swfu@outlook.com'),
-];
+// export const rows = [
+//     createData(1, 'Md Arif 1', 'Hossain', 'arif.swfu@outlook.com'),
+//     createData(2, 'Md Arif 2', 'Hossain', 'arif.swfu@outlook.com'),
+//     createData(3, 'Md Arif 3', 'Hossain', 'arif.swfu@outlook.com'),
+//     createData(4, 'Md Arif 4', 'Hossain', 'arif.swfu@outlook.com'),
+//     createData(5, 'Md Arif 5', 'Hossain', 'arif.swfu@outlook.com'),
+// ];
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -211,6 +212,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ShowTable() {
+    // eslint-disable-next-line no-unused-vars
+    const { loading, error, success, employeeData } = useSelector((state) => state.employee);
+    const dataRows = employeeData.map((row, i) => ({ ...row, no: i + 1 }));
     const classes = useStyles();
     const [viewModal, setViewModal] = useState(false);
     const [order, setOrder] = useState('asc');
@@ -218,6 +222,11 @@ function ShowTable() {
     const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    // const [dataRows, setDataRows] = useState(newRows);
+
+    useEffect(() => {
+        console.log(dataRows);
+    }, [dataRows]);
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -227,7 +236,7 @@ function ShowTable() {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = rows.map((n) => n.no);
+            const newSelecteds = dataRows.map((n) => n.no);
             setSelected(newSelecteds);
         } else {
             setSelected([]);
@@ -265,7 +274,7 @@ function ShowTable() {
 
     const isSelected = (no) => selected.indexOf(no) !== -1;
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, dataRows.length - page * rowsPerPage);
 
     return (
         <div className={classes.mainDiv}>
@@ -285,10 +294,10 @@ function ShowTable() {
                                 orderBy={orderBy}
                                 onSelectAllClick={handleSelectAllClick}
                                 onRequestSort={handleRequestSort}
-                                rowCount={rows.length}
+                                rowCount={dataRows.length}
                             />
                             <TableBody>
-                                {stableSort(rows, getComparator(order, orderBy))
+                                {stableSort(dataRows, getComparator(order, orderBy))
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, index) => {
                                         const isItemSelected = isSelected(row.no);
@@ -335,7 +344,7 @@ function ShowTable() {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 25]}
                         component="div"
-                        count={rows.length}
+                        count={dataRows.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}
@@ -344,7 +353,7 @@ function ShowTable() {
                 </Paper>
             </div>
             <CustomModal viewModal={viewModal} setViewModal={setViewModal}>
-                <SendMail selected={selected} />
+                <SendMail selected={selected} setViewModal={setViewModal} />
             </CustomModal>
         </div>
     );

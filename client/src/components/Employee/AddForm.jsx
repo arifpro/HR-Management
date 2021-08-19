@@ -2,11 +2,14 @@
 // import PropTypes from 'prop-types';
 import { Box, Tab, Tabs, Typography } from '@material-ui/core';
 import { createTheme, makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { IoMail, IoPerson } from 'react-icons/io5';
 import { VscLoading } from 'react-icons/vsc';
+import { toast } from 'react-toastify';
 import AddDragAndDrop from './AddDragAndDrop';
 import './AddForm.scss';
+import { addSingleEmployee } from '../../redux/actions';
 
 // const isString = (input) => {
 //     if (Object.prototype.toString.call(input) === '[object String]') return true;
@@ -84,21 +87,41 @@ const useStyles = makeStyles((theme) => ({
 
 // main function
 const AddForm = () => {
-    const [data, setData] = useState({
+    const classes = useStyles();
+    const dispatch = useDispatch();
+    const [value, setValue] = useState(0);
+    const initialData = {
         firstName: '',
         lastName: '',
         email: '',
         error: false,
         loading: false,
-    });
-    const classes = useStyles();
-    const [value, setValue] = useState(0);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
     };
+    const [data, setData] = useState(initialData);
 
-    useEffect(() => console.log(data), [data]);
+    const onSubmit = () => {
+        setData((oldData) => ({ ...oldData, loading: true }));
+        const postData = {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+        };
+
+        dispatch(addSingleEmployee(postData))
+            .then((res) => {
+                if (res) {
+                    toast.success(res.payload.message);
+                } else {
+                    toast.success(res.error);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                toast.error(`Error adding employee: ${error.message}!`);
+            });
+
+        setData(initialData);
+    };
 
     return (
         <div className="AddForm">
@@ -108,7 +131,7 @@ const AddForm = () => {
                         orientation="vertical"
                         variant="scrollable"
                         value={value}
-                        onChange={handleChange}
+                        onChange={(event, newValue) => setValue(newValue)}
                         className={classes.tabs}
                     >
                         <Tab label="Form" {...a11yProps(0)} />
@@ -124,11 +147,15 @@ const AddForm = () => {
                             <div className="form__username">
                                 <IoPerson />
                                 <input
-                                    // type="text"
+                                    type="text"
                                     placeholder="First name"
                                     autoComplete="off"
                                     onChange={(e) => {
-                                        setData({ ...data, name: e.target.value, error: false });
+                                        setData((oldData) => ({
+                                            ...oldData,
+                                            firstName: e.target.value,
+                                            error: false,
+                                        }));
                                     }}
                                 />
                             </div>
@@ -140,7 +167,11 @@ const AddForm = () => {
                                     placeholder="Last name"
                                     autoComplete="off"
                                     onChange={(e) => {
-                                        setData({ ...data, name: e.target.value, error: false });
+                                        setData((oldData) => ({
+                                            ...oldData,
+                                            lastName: e.target.value,
+                                            error: false,
+                                        }));
                                     }}
                                 />
                             </div>
@@ -152,7 +183,11 @@ const AddForm = () => {
                                     placeholder="Email address"
                                     autoComplete="off"
                                     onChange={(e) => {
-                                        setData({ ...data, email: e.target.value, error: false });
+                                        setData((oldData) => ({
+                                            ...oldData,
+                                            email: e.target.value,
+                                            error: false,
+                                        }));
                                     }}
                                 />
                             </div>
@@ -176,7 +211,7 @@ const AddForm = () => {
                         <button
                             type="button"
                             className="main__button"
-                            onClick={() => null}
+                            onClick={() => onSubmit()}
                             disabled={data.loading}
                         >
                             {data.loading && (

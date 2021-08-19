@@ -15,18 +15,17 @@ const sendMail = (data) => async (dispatch) => {
         const res = await api.post(`/api/v1/mail/send`, newMail);
 
         if (res.status === 200) {
-            dispatch({
+            return dispatch({
                 type: mailConstants.SEND_MAIL_SUCCESS,
                 payload: res.data,
             });
-        } else {
-            dispatch({
-                type: mailConstants.SEND_MAIL_FAILED,
-                error: res.data.message,
-            });
         }
+        return dispatch({
+            type: mailConstants.SEND_MAIL_FAILED,
+            error: res.data.message,
+        });
     } catch (e) {
-        dispatch({
+        return dispatch({
             type: mailConstants.SEND_MAIL_FAILED,
             error: e,
         });
