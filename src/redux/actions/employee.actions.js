@@ -42,19 +42,18 @@ const addSingleEmployee = (data) => async (dispatch) => {
 
         const res = await api.post(`/api/v1/employee/add`, newEmployee);
 
-        if (res.status === 200) {
-            dispatch({
+        if (res.status === 201) {
+            return dispatch({
                 type: employeeConstants.ADD_SINGLE_EMPLOYEE_SUCCESS,
                 payload: res.data,
             });
-        } else {
-            dispatch({
-                type: employeeConstants.ADD_SINGLE_EMPLOYEE_FAILED,
-                error: res.data.message,
-            });
         }
+        return dispatch({
+            type: employeeConstants.ADD_SINGLE_EMPLOYEE_FAILED,
+            error: res.data.message,
+        });
     } catch (e) {
-        dispatch({
+        return dispatch({
             type: employeeConstants.ADD_SINGLE_EMPLOYEE_FAILED,
             error: e,
         });
@@ -75,18 +74,17 @@ const addMultipleEmployees = (data) => async (dispatch) => {
         const res = await api.post(`/api/v1/employee/add-multiple`, newMail);
 
         if (res.status === 200) {
-            dispatch({
+            return dispatch({
                 type: employeeConstants.ADD_MULTIPLE_EMPLOYEES_SUCCESS,
                 payload: res.data,
             });
-        } else {
-            dispatch({
-                type: employeeConstants.ADD_MULTIPLE_EMPLOYEES_FAILED,
-                error: res.data.message,
-            });
         }
+        return dispatch({
+            type: employeeConstants.ADD_MULTIPLE_EMPLOYEES_FAILED,
+            error: res.data.message,
+        });
     } catch (e) {
-        dispatch({
+        return dispatch({
             type: employeeConstants.ADD_MULTIPLE_EMPLOYEES_FAILED,
             error: e,
         });

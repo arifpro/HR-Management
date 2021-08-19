@@ -1,5 +1,6 @@
-import { Suspense, lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import Loading from './components/Loading/Loading';
 
 // routes (Code Splitting and Pre-fetching)
@@ -21,6 +22,7 @@ function App() {
                     <Route component={PageNotFound} />
                 </Switch>
             </Suspense>
+            <ToastContainer autoClose={5000} />
         </Router>
     );
 }

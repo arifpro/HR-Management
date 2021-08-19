@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { VscLoading } from 'react-icons/vsc';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { sendMail } from '../../redux/actions';
 import './AddForm.scss';
-import { rows } from './ShowTable';
 
 const styles = {
     mainSection: {
@@ -33,13 +35,18 @@ const styles = {
     },
 };
 
-const SendMail = ({ selected }) => {
-    const selectedData = selected.map((no) => rows[no - 1]);
+const SendMail = ({ selected, setViewModal }) => {
+    // eslint-disable-next-line no-unused-vars
+    const dispatch = useDispatch();
+    const { employeeData } = useSelector((state) => state.employee);
+    // const { success, error } = useSelector((state) => state.mail);
+    const dataRows = employeeData.map((row, i) => ({ ...row, no: i + 1 }));
+    const selectedData = selected.map((no) => dataRows[no - 1]);
     const initialData = {
         subject: '',
         message: '',
         loading: false,
-        error: '',
+        error: false,
     };
     const [data, setData] = useState(initialData);
 
@@ -51,7 +58,22 @@ const SendMail = ({ selected }) => {
             message: data.message,
         };
 
-        console.log(postData);
+        dispatch(sendMail(postData))
+            .then((res) => {
+                if (res) {
+                    toast.success(res.payload.message);
+                    // toast.success('Mail sent successfully!');
+                } else {
+                    toast.success(res.error);
+                    // toast.error('Error sending mail!');
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                toast.error(`Error sending mail: ${error.message}!`);
+            });
+
+        setViewModal(false);
         setData(initialData);
     };
 
@@ -67,7 +89,11 @@ const SendMail = ({ selected }) => {
                     autoComplete="off"
                     style={{ ...styles.modalField, ...(data.error ? { borderColor: 'red' } : {}) }}
                     onChange={(e) => {
-                        setData({ ...data, name: e.target.value, error: false });
+                        setData((oldData) => ({
+                            ...oldData,
+                            subject: e.target.value,
+                            error: false,
+                        }));
                     }}
                 />
 
@@ -77,7 +103,11 @@ const SendMail = ({ selected }) => {
                     placeholder="Message"
                     autoComplete="off"
                     onChange={(e) => {
-                        setData({ ...data, email: e.target.value, error: false });
+                        setData((oldData) => ({
+                            ...oldData,
+                            message: e.target.value,
+                            error: false,
+                        }));
                     }}
                 />
             </div>
