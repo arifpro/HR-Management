@@ -10,6 +10,8 @@ const dbConfig = {
   PASSWORD: process.env.DB_PASSWORD || "",
   DB: process.env.DB_NAME || "hr_management",
   dialect: "mysql",
+  // PORT: process.env.DB_PORT || 3306,
+  // SSL: process.env.DB_SSL || false,
   pool: {
     max: 5,
     min: 0,
@@ -22,6 +24,8 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
   operatorsAliases: false,
+  // port: dbConfig.PORT,
+  // ssl: dbConfig.SSL,
 
   pool: {
     max: dbConfig.pool.max,

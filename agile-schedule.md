@@ -26,18 +26,18 @@
 
 - add employee form (with validation)
 - add multiple employee by csv file upload
-    - csv file upload
-    - drag and drop
-    - form validation
-    - csv file mandatory columns (first name, last name, email address)
-    - ignore other columns
-    - database table name `employees`
-    - only valid columns value will be saved
-    - after successful, show added and failed count
+  - csv file upload
+  - drag and drop
+  - form validation
+  - csv file mandatory columns (first name, last name, email address)
+  - ignore other columns
+  - database table name `employees`
+  - only valid columns value will be saved
+  - after successful, show added and failed count
 - show all employees
-    - table
-    - 5 limit
-    - pagination
-    - checkbox
-    - form to compose email (subject, body) (`https://mailtrap.io` or any)
-    - form validation
+  - table
+  - 5 limit
+  - pagination
+  - checkbox
+  - form to compose email (subject, body) (`https://mailtrap.io` or any)
+  - form validation
